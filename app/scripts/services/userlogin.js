@@ -82,22 +82,27 @@ angular.module('angularRestfulAuthApp')
         user: null
       },
 
-      login: function(url, user) {
+      /**
+       * Login by calling the Drupal REST server.
+       *
+       * @param url
+       *   The Drupal URL
+       * @param user
+       *   Object with the properties "name" and "pass".
+       * @param withCredentials
+       *   Determine if $http should be called "withCredentials"
+       *
+       * @returns {*}
+       */
+      login: function(url, user, withCredentials) {
         var self = this;
         return $http({
           method: 'GET',
           url: url + '/api/login',
-          withCredentials: true,
+          withCredentials: withCredentials,
           headers: {
             'Authorization': 'Basic ' + Base64.encode(user.name + ':' + user.pass)
           }
-        });
-      },
-
-      loginToken: function(url) {
-        return $http({
-          method: 'GET',
-          url: url + '/api/login-token'
         });
       }
     };
