@@ -6,45 +6,53 @@
   <h3 class="text-muted">angular restful auth</h3>
 </div>
 
-<pre>
-  # In settings.php
+<h2>Instructions</h2>
+<ul>
+  <li>Copy to settings.php<pre>
+
+  # Since cookies are sent with the request, we must set
+  # "Access-Control-Allow-Origin" to a specific domain.
   header('Access-Control-Allow-Origin: http://127.0.0.1:9000');
+
   header("Access-Control-Allow-Credentials: true");
   header('Access-Control-Allow-Headers: Authorization');
-</pre>
+  </pre></li>
+  <li>Note that once you are logged in, you will need to logout from Drupal, otherwise
+    you will get a 403 error the next time you try to log in</li>
+</ul>
 
-Note that once you are logged in, you will need to logout from Drupal, otherwise
-you will get a 403 error the next time you try to log in.
+<h2>Console</h2>
+<div class="row">
+  <form role="form" ng-submit="login('login')" class="col-md-6">
+    <div class="form-group">
+      <label>Drupal URL</label>
+      <input type="url" class="form-control" placeholder="http://example.com" ng-model="url" />
+    </div>
 
-<form role="form" ng-submit="login('login')">
-  <div class="form-group">
-    <label>Drupal URL</label>
-    <input type="url" class="form-control" placeholder="http://example.com" ng-model="url" />
+    <div class="form-group">
+      <label class="control-label">User name</label>
+      <input type="text" class="form-control" placeholder="admin" ng-model="user.name" />
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" ng-model="user.pass" />
+    </div>
+
+    <button type="submit" class="btn btn-default">Login</button>
+  </form>
+
+  <div class="response" class="col-md-6">
+    <div ng-show="status" class="status">
+      Status: {{ status }}
+    </div>
+
+    <pre ng-show="status" class="data">
+      {{ response | json }}
+    </pre>
   </div>
-
-  <div class="form-group">
-    <label class="control-label">User name</label>
-    <input type="text" class="form-control" placeholder="admin" ng-model="user.name" />
-  </div>
-
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" ng-model="user.pass" />
-  </div>
-
-  <button type="submit" class="btn btn-default">Login</button>
-</form>
-
-<div class="response">
-  <div ng-show="status" class="status">
-    Status: {{ status }}
-  </div>
-
-  <pre ng-show="status" class="data">
-    {{ response | json }}
-  </pre>
 </div>
 
-<div class="footer">
-  <p><span class="glyphicon glyphicon-heart"></span> Gizra</p>
-</div>
+<footer>
+  <p><span class="glyphicon glyphicon-heart"></span> <a href="http://gizra.com" target="_blank">Gizra</a></p>
+</footer>

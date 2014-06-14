@@ -7,8 +7,7 @@ angular.module('angularRestfulAuthApp')
     storage.bind($scope,'user.pass');
 
     $scope.login = function(method) {
-      var withCredentials = method == 'login';
-      userLogin.login($scope.url, $scope.user, withCredentials)
+      userLogin.login($scope.url, $scope.user, method)
       .success(function(data, status) {
         $scope.status = status;
         $scope.response = data;

@@ -89,17 +89,16 @@ angular.module('angularRestfulAuthApp')
        *   The Drupal URL
        * @param user
        *   Object with the properties "name" and "pass".
-       * @param withCredentials
-       *   Determine if $http should be called "withCredentials"
+       * @param method
+       *   The method of the login: "login" or "loginToken".
        *
        * @returns {*}
        */
-      login: function(url, user, withCredentials) {
-        var self = this;
+      login: function(url, user, method) {
         return $http({
           method: 'GET',
-          url: url + '/api/login',
-          withCredentials: withCredentials,
+          url: url + (method === 'login' ? '/api/login' : '/api/login-token'),
+          withCredentials: method === 'login',
           headers: {
             'Authorization': 'Basic ' + Base64.encode(user.name + ':' + user.pass)
           }
