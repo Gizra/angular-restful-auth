@@ -1,22 +1,32 @@
 <div class="header">
   <ul class="nav nav-pills pull-right">
     <li class="active"><a ng-href="#">Login</a></li>
-    <li><a ng-href="#/login-token">Login Token</a></li>
+    <li><a ng-href="#">Login Token</a></li>
   </ul>
   <h3 class="text-muted">angular restful auth</h3>
 </div>
 
 <pre>
   # In settings.php
-  header('Access-Control-Allow-Origin: http://127.0.0.1:9000');
-  header("Access-Control-Allow-Credentials: true");
+
+  # Since cookies are not sent with the request, we can set "Access-Control-Allow-Origin"
+  # to a wildcard, rather than a specific domain.
+  header('Access-Control-Allow-Origin: *');
+
+  header('Access-Control-Allow-Credentials: true');
   header('Access-Control-Allow-Headers: Authorization');
 </pre>
 
-Note that once you are logged in, you will need to logout from Drupal, otherwise
-you will get a 403 error the next time you try to log in.
+<p>
+  Enable "Restful token auth" module.
+</p>
 
-<form role="form" ng-submit="login('login')">
+<p>
+  Note that getting the token doesn't log you in, so you may call this endpoint
+  over an over, without getting a 403
+</p>
+
+<form role="form" ng-submit="login('loginToken')">
   <div class="form-group">
     <label>Drupal URL</label>
     <input type="url" class="form-control" placeholder="http://example.com" ng-model="url" />
