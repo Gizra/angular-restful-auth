@@ -13,6 +13,9 @@
   header('Access-Control-Allow-Headers: Authorization');
 </pre>
 
+Note that once you are logged in, you will need to logout from Drupal, otherwise
+you will get a 403 error the next time you try to log in.
+
 <form role="form" ng-submit="login()">
   <div class="form-group">
     <label>Drupal URL</label>
