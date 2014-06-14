@@ -37,9 +37,9 @@
     Status: {{ status }}
   </div>
 
-  <div class="data">
-    {{ response }}
-  </div>
+  <pre ng-show="status" class="data">
+    {{ response | json }}
+  </pre>
 </div>
 
 <div class="footer">
