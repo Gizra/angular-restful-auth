@@ -11,9 +11,9 @@ angular.module('angularRestfulAuthApp')
       .success(function(data, status) {
         $scope.status = status;
         $scope.response = data;
-      }).error(function(reason, status) {
+      }).error(function(data, status) {
           $scope.status = status;
-          $scope.response = reason;
+          $scope.response = data;
       });
 
 
